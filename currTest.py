@@ -77,8 +77,8 @@ for label in labels:
 	
 	output[label] = rOut
 	print("{} Resistance:{}                            ".format(label, rOut))
+	print()
 
-print()
 print("{}   {}   {}   {}   {}".format(output.get("Primary"), output.get("Secondary"), output.get("Black"), output.get("Red"), output.get("Short")))
 
 # TODO: add sheets or SQL integration
