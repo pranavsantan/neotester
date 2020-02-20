@@ -24,7 +24,7 @@ for prefix in list:
 	f.write("{\n")
 	f.write("\t\"prefix\": \"{}\",\n".format(prefix))
 	f.write("\t\"version\": {},\n".format(version))
-	f.write("\t\"file\": \"https://neocharge.s3-us-west-1.amazonaws.com/wifi_manager_v{}.bin\n".format(version))
+	f.write("\t\"file\": \"https://neocharge.s3-us-west-1.amazonaws.com/wifi_manager_v{}.bin\"\n".format(version))
 	f.write("}")
 	f.close()
 

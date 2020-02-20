@@ -23,7 +23,7 @@ Config_t *initConfig(){
 	c->curr = 30;
 	c->date = 190924;
 	strncpy(c->pre, "PS", 4);
-   c->serial = 2;
+   	c->serial = 2;
 	strncpy(c->pad, "\0", 19);
 	return c;
 }
