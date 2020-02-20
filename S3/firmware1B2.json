@@ -1,4 +1,5 @@
 {
-    "version": 1402,
-    "file": "https://neocharge.s3-us-west-1.amazonaws.com/wifi_manager_v1402.bin"
+	"prefix": "1B2",
+	"version": 1502,
+	"file": "https://neocharge.s3-us-west-1.amazonaws.com/wifi_manager_v1502.bin
 }
