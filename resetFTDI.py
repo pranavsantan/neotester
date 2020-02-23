@@ -1,3 +1,6 @@
+# List all USB devices and reset FTDI devices with ID 0403:6015 (FT232RL)
+# Need to run with SuperUser permissions
+
 import os
 import fcntl
 import subprocess
