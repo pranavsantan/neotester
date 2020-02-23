@@ -7,8 +7,7 @@ import fcntl
 import serial
 import re
 
-pwd = "nema1450"
-currFW = 1502
+from config import pwd, FTDIport, currFW
 
 # run resetFTDI Script as SUDO and enable RW access to Serial Ports
 def resetFTDI():
@@ -19,7 +18,7 @@ def resetFTDI():
 def initSerial():
     ser = serial.Serial()
     ser.baudrate = 115200
-    ser.port = '/dev/ttyUSB0'
+    ser.port = FTDIport
     ser.timeout = 1
     ser.rts = False
     ser.dtr = False
@@ -52,7 +51,7 @@ fw, sn = checkFW()
 
 if(fw < currFW):
     print("Current FW(v{}) older than Latest FW(v{})".format(fw, currFW))
-    os.system("python ~/esp/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 -p /dev/ttyUSB0 -b 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0xd000 ~/esp/NeoTester/flash/ota_data_initial.bin 0x1000 ~/esp/NeoTester/flash/bootloader.bin 0x10000 ~/esp/NeoTester/S3/wifi_manager_v{}.bin  0x8000 ~/esp/NeoTester/flash/partitions.bin".format(currFW))
+    os.system("python ~/esp/esp-idf/components/esptool_py/esptool/esptool.py --chip esp32 -p {} -b 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0xd000 ~/esp/NeoTester/flash/ota_data_initial.bin 0x1000 ~/esp/NeoTester/flash/bootloader.bin 0x10000 ~/esp/NeoTester/S3/wifi_manager_v{}.bin  0x8000 ~/esp/NeoTester/flash/partitions.bin".format(FTDIport, currFW))
     checkFW()
 else:
     print("Firmware up to date (v{} >= v{})".format(fw, currFW))
