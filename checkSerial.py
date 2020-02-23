@@ -5,14 +5,13 @@ import os
 import platform
 import fcntl
 import serial
-import re
 
 from config import pwd, FTDIport, currFW
 
 # run resetFTDI Script as SUDO and enable RW access to Serial Ports
 def resetFTDI():
     os.system("echo {} | sudo -S python3 resetFTDI.py".format(pwd))
-    os.system("echo {} | sudo -S chmod a+rw /dev/ttyUSB0 /dev/ttyUSB1".format(pwd))
+    os.system("echo {} | sudo -S chmod a+rw {}".format(pwd, FTDIport))
 
 # Open Serial port
 def initSerial():

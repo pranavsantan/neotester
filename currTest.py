@@ -16,12 +16,10 @@ import serial
 import modbus_tk.defines as cst
 from modbus_tk import modbus_rtu
 
+from config import pwd, pwMeterPort
+
 def clear():
 	_ = call('clear' if os.name == 'posix' else 'cls')
-
-def getSerialBytes():
-	serial = call('espefuse.py -b 115200 -p /dev/ttyUSB0 dump | grep "EFUSE block 3:" -A1')
-	return serial
 
 def initModbus(serial):
 	# Connect to the slave
@@ -52,7 +50,10 @@ def readVIR(master):
 def get_user_input(user_input_ref, msg):
     user_input_ref[0] = input(msg)
 
-serial = serial.Serial(port='/dev/ttyUSB1', baudrate=9600, bytesize=8, parity='N', stopbits=1, xonxoff=0)
+
+os.system("echo {} | sudo -S chmod a+rw {}".format(pwd, pwMeterPort))
+
+serial = serial.Serial(port = pwMeterPort, baudrate = 9600, bytesize = 8, parity = 'N', stopbits = 1, xonxoff = 0)
 master = initModbus(serial)
 
 labels = ["Short", "Red", "Black", "Secondary", "Primary"]
