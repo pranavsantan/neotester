@@ -8,13 +8,14 @@ def resetFTDI():
     USBDEVFS_RESET = ord('U') << (4*2) | 20
 
     # Get Devfs of FTDI Devices
-    listdev = str(subprocess.check_output("lsusb | grep 0403:6015", shell=True)).split("\n")
-    # print(listdev)
-    
+    listdev = str(subprocess.check_output("lsusb | grep 0403:6015", shell=True)).split("\\n")
+
     for device in listdev:
-        devarr = str(device).split()
-        bus = devarr[1]
-        dev = devarr[3][:-1]
+        if(len(device) < 10):
+            break
+
+        bus = device[device.find("Bus ")+len("Bus "): device.find(" Device")]
+        dev = device[device.find("Device ")+len("Device "): device.find(": ID")]
 
         # open USB Device
         fd = os.open("/dev/bus/usb/{}/{}".format(bus, dev), os.O_WRONLY)
