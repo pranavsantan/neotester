@@ -57,3 +57,8 @@ if(fw < currFW):
     checkFW()
 else:
     print("Firmware up to date (v{} >= v{})".format(fw, currFW))
+
+if('NC-00-000000--00000000' in sn):
+    print("Serial No. Not Assigned \\\TODO Generate and flash SN")
+
+quit()
