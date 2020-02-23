@@ -11,8 +11,8 @@ from config import pwd, FTDIport, currFW
 
 # run resetFTDI Script as SUDO and enable RW access to Serial Ports
 def resetFTDI():
-    os.system("echo {pwd} | sudo -S python3 resetFTDI.py")
-    os.system("echo {pwd} | sudo -S chmod a+rw /dev/ttyUSB0 /dev/ttyUSB1")
+    os.system("echo {} | sudo -S python3 resetFTDI.py".format(pwd))
+    os.system("echo {} | sudo -S chmod a+rw /dev/ttyUSB0 /dev/ttyUSB1".format(pwd))
 
 # Open Serial port
 def initSerial():
@@ -36,6 +36,8 @@ def checkFW():
         line = line[line.find("0;32mI ")+len("0;32mI ") : line.rfind("\\x1b")]
 
         if 'STATE: Idle' in line:
+            cont = False
+        if 'wifi: set country:' in line:
             cont = False
         if 'Serial No:' in line:
             sn = line[line.find("Serial No:: ")+len("Serial No:: "):]
